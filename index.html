@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universal Academic Assistant</title>
+  <link rel="stylesheet" href="Untitled-14.css"/>
+  <link rel="stylesheet" href="./var.css"/>
+</head>
+<body>
+    <header class="header-container">
+        <div class="logo">⚫Astralis: Blades of Fate</div>
+        <nav class="header-buttons" class="nav-menu">
+          <ul class="nav-menu">
+            <li><a href="index.html" class="clickable">Главная</a></li>
+            <!--<li><a href="#" class="clickable">О сервисе</a></li>
+            <li><a href="#" class="clickable">Контакты</a></li>-->
+          </ul>
+        </nav>
+      </header>
+    <main>
+      <div class="ellipse-1"></div>
+    </div>
+      <head>
+        <title>Astralis: Диаграммы</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+          body {
+            font-family: 'Georgia', serif;
+            padding: 30px;
+            background-size: cover;
+            background: rgba(225, 226, 0, 0.6)
+          }
+      
+          h2 {
+            color: #000000;
+            text-shadow: 1px 1px 4px #000;
+            margin-bottom: 20px;
+          }
+      
+          .chart-wrapper {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+          }
+      
+          .chart-container {
+            width: 45%;
+            min-width: 300px;
+          }
+      
+          canvas {
+            width: 100% !important;
+            height: 300px !important;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(160, 100, 255, 0.5);
+            border: 2px solid rgba(225, 226, 0, 0.6)
+          }
+        </style>
+      </head>
+      
+      <body>
+        <h2> Статистика мира Astralis: Blades of Fate</h2>
+      
+        <div class="chart-wrapper">
+          <div class="chart-container">
+            <canvas id="barChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="bubbleChart"></canvas>
+          </div>
+        </div>
+      
+        <script>
+          // Гистограмма
+          const barData = {
+            labels: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'],
+            datasets: [{
+              label: 'Продано артефактов',
+              data: [5, 9, 7, 12, 8],
+              backgroundColor: 'rgba(153, 102, 255, 0.7)'
+            }]
+          };
+      
+          new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+            data: barData,
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: {
+                duration: 1500, // Время анимации
+                easing: 'easeOutBounce' // Тип анимации
+              },
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Артефакты, проданные в тавернах',
+                  color: '#e0d4ff',
+                  font: {
+                    size: 16,
+                    family: 'Georgia',
+                    weight: 'bold'
+                  }
+                },
+                tooltip: {
+                  enabled: true, // Включаем всплывающие подсказки
+                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                  titleColor: '#fff',
+                  bodyColor: '#ddd',
+                  footerColor: '#ccc',
+                  padding: 10,
+                  callbacks: {
+                    label: function (context) {
+                      return `${context.dataset.label}: ${context.raw} артефактов`;
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: { color: '#ccc' }
+                },
+                x: {
+                  ticks: { color: '#ccc' }
+                }
+              }
+            }
+          });
+      
+          // Пузырьковая диаграмма
+          const bubbleData = {
+            datasets: [{
+              label: 'Оружие',
+              data: [
+                { x: 8, y: 12, r: 6 },   // Кинжал
+                { x: 3, y: 25, r: 10 },  // Боевой молот
+                { x: 5, y: 18, r: 8 },   // Топор
+                { x: 7, y: 15, r: 5 },   // Меч
+                { x: 4, y: 10, r: 4 }    // Лук
+              ],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(255, 159, 64, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 206, 86, 0.6)'
+              ]
+            }]
+          };
+      
+          // Отображение пузырьковой диаграммы
+          new Chart(document.getElementById('bubbleChart'), {
+            type: 'bubble',
+            data: bubbleData,
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: {
+                duration: 1500, // Время анимации
+                easing: 'easeOutElastic' // Тип анимации
+              },
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Боевой арсенал: урон, скорость и редкость оружия',
+                  color: '#e0d4ff',
+                  font: {
+                    size: 16,
+                    family: 'Georgia',
+                    weight: 'bold'
+                  }
+                },
+                tooltip: {
+                  enabled: true, // Включаем всплывающие подсказки
+                  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                  titleColor: '#fff',
+                  bodyColor: '#ddd',
+                  footerColor: '#ccc',
+                  padding: 10,
+                  callbacks: {
+                    label: function (context) {
+                      const weaponNames = ['Кинжал', 'Боевой молот', 'Топор', 'Меч', 'Лук'];
+                      const index = context.dataIndex;
+                      const item = context.raw;
+                      return `${weaponNames[index]} — Скорость: ${item.x}, Урон: ${item.y}, Редкость: ${item.r}`;
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Скорость атаки',
+                    color: '#ccc'
+                  },
+                  beginAtZero: true,
+                  ticks: { color: '#ccc' }
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Урон от удара',
+                    color: '#ccc'
+                  },
+                  beginAtZero: true,
+                  ticks: { color: '#ccc' }
+                }
+              }
+            }
+          });
+        </script>
+</body>
+</html>
